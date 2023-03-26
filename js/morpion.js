@@ -2,12 +2,28 @@ window.onload = function() {
 	var app = document.getElementById('app');
 	var modal = document.getElementById('modal');
 	var game = document.getElementById('game');
+	var rules = document.getElementById('rules');
+	var player_score = document.getElementsByClassName('player_score');
 	var cases = [];
 	var player = 1;
 	var mark = 'X';
 	var hit = 0;
 	var win = false;
+	var points = {
+		'player_1':0,
+		'player_2':0
+	};
 
+	rules.addEventListener('click', function() {
+		var content = `
+			<div>
+				<p>Options in coming...</p>
+
+				<button id="reset_score">Reset scores</button>
+			</div>
+		`;
+		openModal(content, 'rules');
+	});
 
 	for (let x = 0; x < 3; x++) {
 		cases[x] = new Array();
@@ -36,7 +52,7 @@ window.onload = function() {
 		}
 	}
 
-	function openModal(message, winner) {
+	function openModal(message, type) {
 		var closeModal = document.getElementById('closeModal');
 		var main = document.getElementsByTagName('main')[0];
 		var new_message = document.createElement('p');
@@ -50,8 +66,8 @@ window.onload = function() {
 		new_message.innerHTML = message;
 		main.appendChild(new_message);
 
-		if (winner === true) {
-			ok_button.innerText = 'Play Again';
+		if (type === true) {
+			ok_button.innerText = 'Rejouer';
 
 			win = true;
 			main.appendChild(ok_button);
@@ -60,13 +76,32 @@ window.onload = function() {
 			main.appendChild(ok_button);
 		}
 
+		if (type === 'rules') {
+			var reset_scores = document.getElementById('reset_score');
+
+			reset_scores.addEventListener('click', function () {
+				resetScore();
+				reloadGame();
+			});
+		}
+
 		ok_button.addEventListener('click', function() {
 			closeMyModal();
 
-			if (winner == true) {
+			if (type == true) {
 				reloadGame();
 			}
 		});
+	}
+
+	function resetScore() {
+		points.player_1 = 0;
+		points.player_2 = 0;
+
+		player_score[0].innerText = 0;
+		player_score[1].innerText = 0;
+
+		closeMyModal();
 	}
 
 	function closeMyModal() {
@@ -111,14 +146,28 @@ window.onload = function() {
 			cases[2][0].innerText != '' && cases[2][0].innerText == cases[1][1].innerText && cases[1][1].innerText == cases[0][2].innerText
 			) {
 
-			var message = '<span class="playerWin">Player ' + player + '</span>' + ' win the game !';
+			var message = '<span class="playerWin">Le joueur ' + player + '</span>' + ' a gagné la partie !';
+			addScore(player);
 			openModal(message, true);
 		}
 
 		if (hit == 9 && win == false) {
-			var message = 'Egality !!!';
+			var message = 'Egalité';
 			openModal(message, true);
 		}
+	}
+
+	function addScore(player) {
+		if (player == 1) {
+			points.player_1++;
+		}
+
+		if (player == 2) {
+			points.player_2++;
+		}
+
+		player_score[0].innerText = points.player_1;
+		player_score[1].innerText = points.player_2;
 	}
 
 	function reloadGame() {

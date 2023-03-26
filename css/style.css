@@ -14,6 +14,7 @@ body {
 	width: 100%;
 	height: 100%;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
@@ -101,8 +102,8 @@ body {
 }
 
 .ok_button {
-	background: linear-gradient(#F9645B, #E05047);
-	margin-top: 20px;
+	background: linear-gradient(#5AEA81, #0D9A47);
+	margin-top: 60px;
 	padding: .6rem 2.5rem;
 	text-transform: uppercase;
 	font-size: 18px;
@@ -111,6 +112,45 @@ body {
 	cursor: pointer;
 }
 
+
+#score {
+	position: relative;
+	background-color: rgba(226, 208, 171, 0.5);
+	padding: 10px 80px;
+	outline: 4px solid #212121;
+	margin-bottom: 15px;
+	text-align: center;
+	font-size: 1.3rem;
+}
+#score > div {
+	margin-top: 5px;
+}
+#score #rules {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	padding: 5px;
+	background: linear-gradient(#F9645B, #E05047);
+	opacity: 0.8;
+	border-color: #fff;
+	border-radius: 50%;
+	border: 1px solid #fff;
+	font-size: 1.2rem;
+	cursor: pointer;
+}
+#score #rules:hover {
+	transform: scale(1.1);
+}
+#reset_score {
+	background: linear-gradient(#F9645B, #E05047);
+	margin-top: 20px;
+	padding: .6rem 1rem;
+	text-transform: uppercase;
+	font-size: 13px;
+	border-color: #fff;
+	border-radius: 50px;
+	cursor: pointer;
+}
 
 @media screen and (max-width: 768px) {
 	#game {
