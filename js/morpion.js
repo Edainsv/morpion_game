@@ -45,7 +45,7 @@ window.onload = function() {
 					conditionWin(cases, player, hit); // Verify the condition win
 					player = changePlayer();
 				} else {
-					var message = 'This case is already use !';
+					var message = 'Cette case est déjà utilisée !';
 					openModal(message);
 				}
 			});
